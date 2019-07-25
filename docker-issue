@@ -1,0 +1,25 @@
+oc project docker-issue
+oc adm policy add-scc-to-user hostaccess -z jenkins
+
+
+
+podTemplate(cloud:'openshift',label: 'selenium',serviceAccount: 'jenkins',nodeSelector:'kubernetes.io/hostname=devopenshift1-node01',
+  containers: [
+    containerTemplate(
+      name: 'jnlp',
+      image: 'manya97/jenkins_tryout',
+      alwaysPullImage: true,
+      args: '${computer.jnlpmac} ${computer.name}',
+      ttyEnabled: true
+    )],
+    volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')])
+{
+    node('selenium')
+    {
+        container('jnlp')
+        {
+            sh 'docker pull busybox'
+        }
+    }
+    
+}    
