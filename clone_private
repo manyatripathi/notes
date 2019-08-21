@@ -1,0 +1,3 @@
+To access private github repo from openshift jenkins we need to pass the username and password
+in a secret with oc new-app command which will be used to access the repo and the jenkins credentials
+id will be used inside jenkinsfile for cloning.
