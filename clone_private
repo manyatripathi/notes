@@ -5,3 +5,13 @@ id will be used inside jenkinsfile for cloning.
 
 oc new-build --strategy=pipeline --code=https://<user>:<pwd>@github.com/don283978/gittesting.git 
 --name=test1 --build-secret=scr-secret
+
+
+<-------variable to lowercase in jenkinsfile------->
+a = "gvVBUI"
+node {
+    stage('ghdcu'){
+        echo "${a}"
+        echo "${a.toLowerCase()}"
+    }
+}
