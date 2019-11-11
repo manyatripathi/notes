@@ -1,5 +1,5 @@
-oc project docker-issue
-oc adm policy add-scc-to-user hostaccess -z jenkins
+//oc project docker-issue
+//oc adm policy add-scc-to-user hostaccess -z jenkins
 
 
 
