@@ -3,18 +3,19 @@ oc adm policy add-scc-to-user hostaccess -z jenkins
 
 
 
-podTemplate(cloud:'openshift',label: 'selenium',serviceAccount: 'jenkins',nodeSelector:'kubernetes.io/hostname=devopenshift1-node01',
+podTemplate(cloud:'openshift',label: 'docker',serviceAccount: 'jenkins',
   containers: [
     containerTemplate(
       name: 'jnlp',
-      image: 'manya97/jenkins_tryout',
+      image: 'shubhamasati/donotcopy:jenkinsslave',
+      //image: 'manya97/jenkins_tryout',
       alwaysPullImage: true,
       args: '${computer.jnlpmac} ${computer.name}',
       ttyEnabled: true
     )],
     volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')])
 {
-    node('selenium')
+    node('docker')
     {
         container('jnlp')
         {
