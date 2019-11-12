@@ -1,0 +1,31 @@
+node('maven') {
+    def rc = 0
+    def POLICY_VIOLATION = false
+    stage('Clone Repository')
+    {
+        git 'https://github.com/manyatripathi/my-app'
+    }
+    stage('Synopsys Black Duck Scan')
+    {
+        
+        sh 'curl -O ${detect_script_url}'
+        sh 'chmod +x detect.sh'
+        withCredentials([usernamePassword(credentialsId: 'BlackDuck', passwordVariable: 'password', usernameVariable: 'username')]) 
+        {
+            def DETECT_SCRIPT = "./detect.sh --blackduck.url=${blackduckurl} --blackduck.username=$username --blackduck.password=$password --detect.project.name=devops-my-app --detect.project.version.name=pipeline-0.1.${env.BUILD_NUMBER} --blackduck.trust.cert=true "
+            rc = sh(script: "${DETECT_SCRIPT}", returnStatus: true)
+            if (rc == 3)
+            {
+                echo 'BLACK DUCK POLICY VIOLATION'
+                POLICY_VIOLATION = true
+            }    
+        }
+        
+    }
+    stage('email notification')
+    {
+        emailext to: "${mailrecipient}", subject: "Status of blackduck pipeline: ${currentBuild.fullDisplayName}", body: "You can check the status on blackduck hub ${blackduckurl} and for jenkins logs please visit ${env.BUILD_URL}"
+    }
+	
+    
+}
