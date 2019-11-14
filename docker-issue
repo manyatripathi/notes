@@ -3,13 +3,14 @@
 
 
 
-podTemplate(cloud:'openshift',label: 'docker',serviceAccount: 'jenkins',
+podTemplate(cloud:'openshift',label: 'docker',
   containers: [
     containerTemplate(
       name: 'jnlp',
       image: 'shubhamasati/donotcopy:jenkinsslave',
       //image: 'manya97/jenkins_tryout',
       alwaysPullImage: true,
+      envVars: [envVar(key:'http_proxy',value:''),envVar(key:'https_proxy',value:'')],
       args: '${computer.jnlpmac} ${computer.name}',
       ttyEnabled: true
     )],
