@@ -1,2 +1,5 @@
 route : https://<some_url>
 url to be given in jenkinsfile: http://<hostname_of_sonar_service>:9000
+
+
+Support for branches is not available in the community edition.
