@@ -1,0 +1,21 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: claimdataretrievalsvc
+  labels:
+    app: claimdataretrievalsvc
+    
+spec:
+  type: NodePort
+  selector:
+    app: claimdataretrievalsvc
+  ports:
+  - port: 8091
+    name: http
+    targetPort: 8091
+  - port: 80
+    name: tracing
+    targetPort: 80
+  - port: 8080
+    name: jmx
+    targetPort: 8080
