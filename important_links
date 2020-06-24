@@ -5,6 +5,12 @@ https://www.tutsmake.com/upload-project-files-on-github-using-command-line/
 
 https://stackoverflow.com/questions/49051397/create-jenkins-job-remotely-with-rest-api
 https://www.ionutgavrilut.com/2018/create-jenkins-jobs-with-rest-api-and-postman/
+https://support.cloudbees.com/hc/en-us/articles/360039598171-Navigation-in-Jenkins-fails-with-No-valid-crumb-was-included-in-request-errors
+
+--------to create api token in jenkins---------------
+curl 'http://3.85.63.219:8080/me/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken' --data 'newTokenName=my-second-token' --user devops:dev123  -H 'Jenkins-Crumb:03a97f9f8d0071148f82da4d057790f9'
+
 
 
 https://support.cloudbees.com/hc/en-us/articles/203821254-How-to-install-a-new-SSL-certificate
+http://sam.gleske.net/blog/engineering/2016/05/04/jenkins-with-ssl.html
