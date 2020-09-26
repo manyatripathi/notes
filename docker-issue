@@ -25,3 +25,8 @@ podTemplate(cloud:'openshift',label: 'docker',
     }
     
 }    
+
+
+---------------------to connect jenkins to docker(via docker plugin)--------------------
+need to add a socket to docker service so that jenkins can access it
+https://stackoverflow.com/questions/27763340/docker-opts-do-not-work-in-config-file-etc-default-docker
